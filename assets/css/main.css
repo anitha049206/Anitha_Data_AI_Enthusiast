@@ -1502,6 +1502,7 @@ section,
 
 .portfolio-details .portfolio-description p {
   padding: 0;
+  text-align: justify;
 }
 
 .portfolio-details .portfolio-description .testimonial-item {
@@ -1694,3 +1695,32 @@ section,
 .starter-section {
   /* Add your styles here */
 }
+.blog-box {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.blog-box h3 {
+  font-size: 22px;
+  margin: 0 0 10px;
+  color: #333;
+}
+
+.blog-box p {
+  color: #666;
+  font-size: 16px;
+}
+
+.blog-box:hover {
+  transform: scale(1.05);
+}
+
