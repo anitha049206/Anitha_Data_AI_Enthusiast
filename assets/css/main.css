@@ -1723,4 +1723,38 @@ section,
 .blog-box:hover {
   transform: scale(1.05);
 }
+/*
+.hero {
+  position: relative; 
+  padding-bottom: 100px;  
+}
 
+.blog-button {
+  position: absolute;
+  bottom: 320px;
+  right: -5px;
+  padding: 10px 20px;
+  font-size: 18px;
+  border-radius: 5px;
+}
+*/
+/* Custom styles for the Portfolio and Blog buttons */
+.hero a.btn {
+  background-color: #686868; /* Example: Green background */
+  border: none; /* Remove border */
+  color: white; /* White text */
+  padding: -10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  transition: background-color 0.3s;
+  border-radius: 8px; /* Optional: Rounded corners */
+  min-width: 100px;
+}
+
+/* Hover effect for buttons */
+.hero a.btn:hover {
+  background-color: #0563bb; /* Darker green on hover */
+}
