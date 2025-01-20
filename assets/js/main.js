@@ -205,7 +205,7 @@
     });
   }
   */
-  function initSwiper() {
+  /**function initSwiper() {
     document.querySelectorAll(".init-swiper").forEach(function (swiperElement) {
       let config = JSON.parse(
         swiperElement.querySelector(".swiper-config").innerHTML.trim()
@@ -254,6 +254,53 @@
       }
     });
   }
+*/
+function initSwiper() {
+  document.querySelectorAll(".init-swiper").forEach(function (swiperElement) {
+    let config = JSON.parse(
+      swiperElement.querySelector(".swiper-config").innerHTML.trim()
+    );
+    config.autoplay = false; // Disable autoplay for manual navigation
+    const swiper = new Swiper(swiperElement, {
+      ...config,
+      autoplay: false, // Ensure autoplay is turned off
+    });
+
+    // Detect hash fragment on page load and show corresponding blog
+    const hash = window.location.hash;
+    const blogId = hash ? hash.replace("#blog", "") : "1"; // Default to Blog 1
+
+    // Slide to the specific blog based on the hash
+    if (blogId && !isNaN(blogId)) {
+      const slideIndex = parseInt(blogId) - 1;
+      swiper.slideTo(slideIndex); // Navigate to the correct slide
+      document.querySelectorAll('.blog-content').forEach(content => {
+        content.style.display = 'none'; // Hide all blog content
+      });
+      document.querySelector(`#blog${blogId}-content`).style.display = 'block'; // Show targeted blog content
+    }
+
+    // On slide change, update the hash fragment and show the relevant content
+    swiper.on('slideChange', function () {
+      // Hide all blog contents
+      document.querySelectorAll('.blog-content').forEach(content => {
+        content.style.display = 'none';
+      });
+
+      // Show the current slide's content
+      const activeIndex = swiper.realIndex;
+      document.querySelector(`#blog${activeIndex + 1}-content`).style.display = 'block';
+
+      // Update the hash fragment in the URL
+      history.replaceState(null, null, `#blog${activeIndex + 1}`);
+    });
+
+    // Show the first blog content by default if no hash is present
+    if (!hash) {
+      document.querySelector('#blog1-content').style.display = 'block';
+    }
+  });
+}
 
   window.addEventListener("load", initSwiper);
 
