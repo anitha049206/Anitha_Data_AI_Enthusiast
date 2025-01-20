@@ -1758,3 +1758,47 @@ section,
 .hero a.btn:hover {
   background-color: #0563bb; /* Darker green on hover */
 }
+/* Blog Title Slider Styling */
+.blog-title-box {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.blog-title-box h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.blog-title-box p {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #666;
+}
+
+/* Blog Content Styling */
+.blog-content-container {
+  margin-top: 20px;
+  max-width: 980px; /* Adjust the width as per your requirement */
+  margin: 0 auto; /
+}
+
+.blog-content { 
+  text-align: justify;
+  text-justify: inter-word;
+  padding: 10px;
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+.blog-content h3 {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-top: 20px;
+  color: #444;
+}
