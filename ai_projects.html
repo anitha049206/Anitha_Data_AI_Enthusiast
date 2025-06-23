@@ -11,7 +11,7 @@
   <meta property="og:title" content="GenAI Projects / Tech Case Studies">
   <meta property="og:description" content="Explore insights and experiences in data, AI, and innovation shared by Anitha Elangovan.">
   <meta property="og:image" content="https://anitha049206.github.io/Anitha_Data_AI_Enthusiast/assets/img/AI-Projects/abstract.png">
-  <meta property="og:url" content="https://anitha049206.github.io/Anitha_Data_AI_Enthusiast/genai_projects.html">
+  <meta property="og:url" content="https://anitha049206.github.io/Anitha_Data_AI_Enthusiast/blog.html">
   <meta property="og:type" content="website">
 
   <!-- Favicons -->
@@ -124,19 +124,19 @@
             <!-- Blog #1 -->
             <div class="swiper-slide" id="blog1">
               <div class="blog-box">
-                <p><b>April 14, 2025</b></p>
+                <p><b>Case Study #1</b></p>
                 <h2><b>ClaimGenie: GenAI-powered Insurance Claims Assistant</b></h2>
               </div>
             </div>
     
-            <!-- Blog #2 
+            <!-- Blog #2 -->
             <div class="swiper-slide" id="blog2">
               <div class="blog-box">
-                <p><b>Blog #2</b></p>
-                <h2><b>Finding My Voice: Lessons from Women Microsoft Day @ Ivey</b></h2>
+                <p><b>Case Study #2</b></p>
+                <h2><b>Building a Strategic Intelligence Product for Education</b></h2>
               </div>
             </div>
-          
+            <!--
               FOR NEXT BLOGS
               <div class="swiper-slide">
                 <div class="blog-box">
@@ -248,7 +248,7 @@
   <p><i><small>Figure 2: Technical blueprint of ClaimGenie powered by Gemini, embeddings, and RAG</small></i></p>
 </div>
 <hr>
-<h2>📌 Business Process View of ClaimGenie</h2>
+<h2>📌Business Process View of ClaimGenie</h2>
 <p>
   Beyond system architecture and technical workflow, it's equally important to understand how ClaimGenie's logic flows through a real-world claims environment. The diagram below represents a high-level business process view, showing how tasks progress across functional lanes—from data ingestion and AI processing to document review and backend routing.
 </p>
@@ -266,7 +266,7 @@
 <h2>📌 Implementation Walkthrough (Phase by Phase)</h2>
 <h2> Phase 1: Data Collection & Setup</h2>
 <p>
-  I began with a publicly available Kaggle dataset (<a href="https://www.kaggle.com/datasets/sagnik1511/car-insurance-data">Car_Insurance_Claim.csv</a>) containing car insurance claims. Fields included: <b>Age</b>, <b>Gender</b>, <b>Vehicle Type</b>, <b>Driving Experience</b>, <b>Past Accidents</b>, <b>DUIs</b>, and <b>Claim Outcome</b>.
+  I began with a publicly available Kaggle dataset (<code><a href="https://www.kaggle.com/datasets/sagnik1511/car-insurance-data">Car_Insurance_Claim.csv</a></code>) containing car insurance claims. Fields included: <b>Age</b>, <b>Gender</b>, <b>Vehicle Type</b>, <b>Driving Experience</b>, <b>Past Accidents</b>, <b>DUIs</b>, and <b>Claim Outcome</b>.
 </p>
 <p>
   To simulate real-world diversity, I selected 50 sample rows that represented a range of policyholder profiles.
@@ -422,7 +422,71 @@
 
 </div>
 
-     
+     <!-- Blog #2 Content (From Metrics to Momentum) -->
+
+<div class="blog-content" id="blog2-content">
+  <div class="portfolio-description">
+
+    <!-- Introduction Section -->
+    <h2>📌 Introduction: When Dashboards Aren’t Enough</h2>
+    <p>
+      In an age where data is abundant but often underutilized, educational institutions are sitting on a goldmine of insights—ranging from student feedback and course engagement to employment outcomes and market skill demands. Yet much of this intelligence remains scattered across systems, buried in reports, or visualized in static dashboards.
+    </p>
+    <p>
+      This project wasn’t about reporting metrics—it was about enabling decisions. I set out to design a flexible, human-centered intelligence layer that could help academic leaders spot skill gaps, assess specialization outcomes, and inform curriculum alignment. What emerged is a strategic insight tool—an MVP prototype for what could evolve into an internal, role-based academic analytics product.
+    </p>
+
+    <!-- Problem Landscape Section -->
+    <h2>📌 The Problem Landscape: Drowning in Disconnected Data</h2>
+    <p>
+      Educational programs frequently face these recurring questions:
+    </p>
+    <ul>
+      <li>Are we teaching the right skills for today’s job market?</li>
+      <li>Which specializations or pathways lead to better learner outcomes?</li>
+      <li>How do we measure the real-world impact of curriculum choices?</li>
+    </ul>
+    <p>
+      The data exists, but it’s fragmented—course catalogs, learner feedback forms, alumni salary surveys, employer reports. The result? Decisions are made based on gut feel or outdated assumptions.
+    </p>
+    <p><b>My goal:</b> Bring these disconnected data streams into one clear, interactive, and strategic interface.</p>
+ <hr>
+    <h2>📌 Solution Journey: From Data to Strategic Insight</h2>
+    <p>
+      Rather than jumping into charts, I took a product thinking approach—mapping user personas, identifying jobs to be done, and structuring narrative-driven views to reflect stakeholder needs. This led to the creation of a modular intelligence layer that can support curriculum planning, outcome tracking, and real-time decision support.
+    </p>
+    <p>
+      The journey below illustrates the phased product build across discovery, user insight, MVP development, and roadmap planning.
+    </p>
+  <iframe src="from-metrics-to-momentum.html" width="100%" height="650px" style="border:none;"></iframe>
+  <hr>
+<h2>🎯 Explore the MVP: Strategic Intelligence Dashboard</h2>
+<p>This embedded Power BI prototype represents Phase 1 of the internal analytics product. It enables program leaders to explore skill gaps, role-market alignment, and specialization outcomes—all through an interactive, decision-focused lens.</p>
+
+<div style="text-align:center; margin: 30px 0;">
+  <iframe title="Analytics_Dashboard" width="100%" height="500" 
+    src="https://app.powerbi.com/view?r=eyJrIjoiNmRlM2FkMzAtOTk1NC00M2RjLWI5YzEtMWQxYThmYmQzMDU2IiwidCI6IjU0NzA0MGRiLTE4NTUtNDMyMC05NzM4LWU2ODc4ZjYyNzFmYyIsImMiOjN9" 
+    frameborder="0" allowFullScreen="true" style="border:1px solid #ccc; border-radius:8px;"></iframe>
+</div>
+ <ul>
+      <li>🗓️ <b>Built with:</b> Power BI, DAX, Strategic Design Principles</li>
+      <li>📗 <b>Inspired by:</b> Jobs-to-Be-Done, Curriculum Design Frameworks, Outcome-Driven Thinking</li>
+    </ul>
+<hr>
+    <h2>📌 Final Thought</h2>
+    <p>
+      Strategic decision-making in education shouldn't rely on instinct alone. With a thoughtfully designed intelligence layer, program leaders can engage with data not just for reporting—but for reflection, iteration, and alignment.
+    </p>
+    <p>
+      This initiative reimagines how insights can drive action. And in doing so, it demonstrates the power of building tools that work at the intersection of user experience, analytics, and real-world outcomes.
+    </p>
+   
+<strong>Thanks for reading!</strong> If you're working at the intersection of product, analytics, or GenAI—whether in education, finance, or insurance—I'd love to connect.  
+Explore more of my work or reach out via <a href="https://www.linkedin.com/in/anithaelangovan4/" target="_blank">LinkedIn</a> to collaborate on data-driven innovation.
+</p>
+
+</div>
+
   </main>
 
   <footer id="footer" class="footer position-relative light-background">
