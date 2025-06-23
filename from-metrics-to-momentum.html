@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>From Metrics to Momentum: Product Journey</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+            /* padding: 10px;*/
+           margin: 0;
+            padding: 0;
+            overflow-y: auto;
+        }
+        
+        .container {
+            max-width: 80%;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 2px,
+                rgba(255,255,255,0.05) 2px,
+                rgba(255,255,255,0.05) 4px
+            );
+            animation: slide 20s linear infinite;
+        }
+        
+        @keyframes slide {
+            0% { transform: translateX(-50px); }
+            100% { transform: translateX(50px); }
+        }
+        
+        .header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header p {
+            font-size: 1rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .journey-nav {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 3px solid #e9ecef;
+            overflow-x: auto;
+            flex-shrink: 0;
+        }
+        
+        .nav-item {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+             border-right: 8px solid #ccc;
+               background: #f8f9fa;
+            border-bottom: 8px solid transparent;
+            min-width: 140px;
+        }
+        
+        .nav-item:hover {
+            background: #e9ecef;
+            transform: translateY(-2px);
+           
+    
+        }
+        
+        .nav-item.active {
+            background: white;
+            border-bottom-color: #3498db;
+            box-shadow: 0 -5px 15px rgba(52, 152, 219, 0.1);
+        }
+        
+        .nav-item h3 {
+            color: #2c3e50;
+            margin-bottom: 2px;
+            font-size: 0.95rem;
+        }
+        
+        .nav-item span {
+            color: #7f8c8d;
+            font-size: 0.8rem;
+        }
+        
+        .content-section {
+            display: none;
+            padding: 20px;
+            animation: fadeIn 0.5s ease-in;
+            flex: 1;
+            overflow-y: auto;
+            height: 100%;
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .problem-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .problem-card {
+            background: linear-gradient(135deg, #973737 0%, #f59978 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(238, 90, 36, 0.3);
+        }
+        
+        .problem-card h3 {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .problem-list {
+            list-style: none;
+        }
+        
+        .problem-list li {
+            margin-bottom: 6px;
+            padding-left: 25px;
+            position: relative;
+            font-size: 0.85rem;
+        }
+        
+        .problem-list li::before {
+            content: '⚠️    ';
+            position: absolute;
+            left: 0;
+        }
+        .success-list {
+    list-style: none; /* ⬅️ This line removes the browser bullet */
+    padding-left: 0;
+}
+        .success-list li {
+            margin-bottom: 6px;
+            padding-left: 25px;
+            position: relative;
+            font-size: 0.85rem;
+        }
+        .success-list li::before {
+    content: '◈';
+    position: absolute;
+    left: 0;
+}
+        
+        .persona-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .persona-card {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(9, 132, 227, 0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .persona-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .persona-avatar {
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .persona-card h3 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+        
+        .persona-card p {
+            font-size: 0.8rem;
+            margin-bottom: 8px;
+        }
+        
+        .solution-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin: 10px 0;
+        }
+        
+        .feature-card {
+            background: linear-gradient(135deg, #00b894 0%, #00a085 100%);
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 184, 148, 0.3);
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+        
+        .feature-card p {
+            font-size: 0.8rem;
+        }
+        
+        .roadmap-timeline {
+            position: relative;
+            padding: 20px 0;
+           
+        }
+        
+        .roadmap-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, #3498db, #9b59b6);
+            transform: translateX(-50%);
+        }
+        
+        .phase {
+            display: flex;
+            margin-bottom: 2px;
+            align-items: center;
+        }
+        
+        .phase:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .phase-content {
+            flex: 0.5;
+            background: white;
+            padding: 6px 6px;
+            border-radius: 5px;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+            margin: 0 5px;
+            position: relative;
+            font-size: 0.72rem; /* reduces overall text height */
+    line-height: 1;
+        }
+        
+        .phase-content h3 {
+            font-size: 0.8rem;
+            margin-bottom: 10px;
+        }
+        
+        .phase-content p {
+            font-size: 0.7rem;
+            margin-bottom: 8px;
+        }
+        
+        .phase:nth-child(even) .phase-content::before {
+            right: -15px;
+            left: auto;
+            border-left-color: white;
+            border-right-color: transparent;
+        }
+        
+        .phase-content::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: 10px solid;
+            border-color: transparent white transparent transparent;
+        }
+        
+        .phase-number {
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #3498db, #9b59b6);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 10px 30px rgba(52, 152, 219, 0.3);
+        }
+        
+        .results-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+            margin: 10px 0;
+        }
+        
+        .metric-card {
+            background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+            color: white;
+            padding: 5px;
+            border-radius: 5px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(108, 92, 231, 0.3);
+        }
+        
+        .metric-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(to right, #3498db, #9b59b6);
+            border-radius: 2px;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 6px;
+            border-radius: 8px;
+            margin: 12px 0;
+            border-left: 4px solid #e17055;
+            font-size: 0.85rem;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: #646565;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            margin: 3px 3px 3px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .problem-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .roadmap-timeline::before {
+                left: 30px;
+            }
+            
+            .phase {
+                flex-direction: column !important;
+                align-items: flex-start;
+                padding-left: 60px;
+            }
+            
+            .phase-content {
+                margin: 20px 0 0 0;
+            }
+            
+            .phase-content::before {
+                display: none;
+            }
+            
+            .phase-number {
+                position: absolute;
+                left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1> From Metrics to Momentum: Product Journey</h1>
+            <!--<p>Building a Strategic Intelligence Tool for Educational Programs</p>-->
+        </div>
+        
+        <nav class="journey-nav">
+            <div class="nav-item active" onclick="showSection('problem')">
+                <h3>Problem</h3>
+                <span>Disconnected Data</span>
+            </div>
+            <div class="nav-item" onclick="showSection('discovery')">
+                <h3>Discovery</h3>
+                <span>User Research</span>
+            </div>
+            <div class="nav-item" onclick="showSection('solution')">
+                <h3>Solution</h3>
+                <span>Product Design</span>
+            </div>
+            <div class="nav-item" onclick="showSection('roadmap')">
+                <h3>Roadmap</h3>
+                <span>Future Vision</span>
+            </div>
+            <div class="nav-item" onclick="showSection('results')">
+                <h3>Results</h3>
+                <span>Impact & Learnings</span>
+            </div>
+        </nav>
+        
+        <section class="content-section active" id="problem">
+            <h2 class="section-title">The Problem Landscape</h2>
+            <div class="highlight-box">
+                <strong>Core Challenge:</strong> Educational institutions are drowning in disconnected data, making decisions based on gut feel rather than strategic intelligence.
+            </div>
+            
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <h3><center>🎯 Strategic Misalignment </center></h3>
+                    <ul class="problem-list">
+                        <li>Skills taught vs. market demand disconnect</li>
+                        <li>Unclear ROI on curriculum investments</li>
+                        <li>Limited visibility into career outcomes</li>
+                        <li>Reactive rather than proactive planning</li>
+                    </ul>
+                </div>
+                <div class="problem-card">
+                    <h3><center>📊 Data Fragmentation </center></h3>
+                    <ul class="problem-list">
+                        <li>Course catalogs in isolation</li>
+                        <li>Learner feedback scattered</li>
+                        <li>Alumni data disconnected</li>
+                        <li>Employer insights missing</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="highlight-box">
+                
+                <strong>Key Questions Driving the Solution:</strong><br>
+                <br>
+                • Are we teaching the right skills for today's job market?<br>
+                • Which specializations lead to better learner outcomes?<br>
+                • How do we measure real-world impact of curriculum choices?
+            </div>
+        </section>
+        
+        <section class="content-section" id="discovery">
+            <h2 class="section-title">Discovery & User Research</h2>
+            <div class="highlight-box">
+                <strong>Approach:</strong> Instead of starting with charts, I started with users. Understanding their <strong>jobs-to-be-done</strong> became the foundation for product strategy.
+            </div>
+            
+            <div class="persona-grid">
+                <div class="persona-card">
+                    <p><strong>Primary Persona</strong></p>
+                    <div class="persona-avatar">👨‍💼</div>
+                    <h3>Academic Director</h3>
+                    
+                    <p>"I need to know where our curriculum is misaligned with market demand"</p>
+                    <div class="tag">Strategic Planning</div>
+                    <div class="tag">Budget Allocation</div>
+                </div>
+                <div class="persona-card">
+                    <p><strong>Secondary Persona</strong></p>
+                    <div class="persona-avatar">👩‍🎓</div>
+                    <h3>Career Services</h3>
+                    
+                    <p>"I want to understand which pathways lead to the best employment outcomes"</p>
+                    <div class="tag">Student Guidance</div>
+                    <div class="tag">Outcome Tracking</div>
+                </div>
+                <div class="persona-card">
+                    <p><strong>Tertiary Persona</strong></p>
+                    <div class="persona-avatar">🎓</div>
+                    <h3>Students</h3>
+                   
+                    <p>"I want to know what skills I should prioritize to be job-market ready"</p>
+                    <div class="tag">Career Planning</div>
+                    <div class="tag">Skill Development</div>
+                </div>
+            </div>
+            
+            <div class="highlight-box">
+                <strong>Key Discovery Insights:</strong><br>
+                
+                •  Skill gap detection = curriculum design aid<br>
+                •  Role-salary analysis = academic and career coaching tool<br>
+                •  Conditional formatting + storytelling = leadership-ready insights<br>
+               
+            </div>
+        </section>
+        
+        <section class="content-section" id="solution">
+            <h2 class="section-title">Solution Architecture</h2>
+            <div class="highlight-box">
+                <strong>Design Philosophy:</strong> Built in Power BI with a product design mindset - "If I were the Dean, would this view help me take action in 10 seconds or less?"
+            </div>
+            
+            <div class="solution-features">
+                <div class="feature-card">
+                    <div class="feature-icon"><center>🔍</center></div>
+                    <h3><center>Skill Gap Engine</center></h3>
+                    <p>DAX logic to match skills taught vs. employer demand using rule - based measures with dynamic conditional highlights</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><center>👥</center></div>
+                    <h3><center>Persona Views</center></h3>
+                    <p>Toggle between Executive View vs. Career Services View with interactive buttons & bookmarks</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><center>📖</center></div>
+                    <h3><center>Narrative Design</center></h3>
+                    <p>KPI cards and callouts tell a story per screen, moving beyond static reporting</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><center>⚡</center></div>
+                    <h3><center>Interactive Intelligence</center></h3>
+                    <p>Drilldowns, filters, and slicers help users personalize insights for their specific needs</p>
+                </div>
+            </div>
+            
+            <div class="highlight-box">
+                <br>
+                <strong>Technical Stack:</strong>
+                <div class="tag">Power BI</div>
+                <div class="tag">DAX Logic</div>
+                <div class="tag">Interactive Dashboards</div>
+                <div class="tag">Conditional Formatting</div>
+                <div class="tag">Persona-Based Views</div>
+                <br></br>
+            </div>
+        </section>
+        
+        <section class="content-section" id="roadmap">
+            <h2 class="section-title">Product Roadmap</h2>
+            <div class="highlight-box">
+                <strong>Vision:</strong> Enable real-time, skills-aligned decision-making across academic teams with a scalable internal SaaS-like platform.
+            </div>
+            
+            <div class="roadmap-timeline">
+                <div class="phase">
+                    <div class="phase-number">1</div>
+                    <div class="phase-content">
+                        <h3>MVP - Foundation ✅ <div class="tag">MVP Complete</div> </h3>
+                        <p><strong>Features:</strong> Skill Gap Engine, Persona Views, Executive UX</p>
+                        
+                    </div>
+                </div>
+                
+                <div class="phase">
+                    <div class="phase-number">2</div>
+                    <div class="phase-content">
+                        <h3>Personalization Layer ⏳ <div class="tag">User Empowerment</div></h3>
+                        <p><strong>Features:</strong> "What-if" course-path simulation, Specialization-fit recommendations </p>
+                        
+                    </div>
+                </div>
+                
+                <div class="phase">
+                    <div class="phase-number">3</div>
+                    <div class="phase-content">
+                        <h3>Feedback & Governance ⏳<div class="tag">Product Maturity</div> </h3>
+                        <p><strong>Features:</strong> Feedback loop for faculty & learners, recruiter-informed skills</p>
+                        
+                    </div>
+                </div>
+                
+                <div class="phase">
+                    <div class="phase-number">4</div>
+                    <div class="phase-content">
+                        <h3>AI-Enhanced Insights ⏳ <div class="tag">Future Innovation</div></h3>
+                        <p><strong>Features:</strong> Automated alignment reports, Recruiter-informed skill gaps, AI-curated course bundles</p>
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="content-section" id="results">
+            <h2 class="section-title">Results & Impact</h2>
+            
+            <div class="results-metrics">
+                <div class="metric-card">
+                    <div class="metric-value">✅</div>
+                    <p>Interaction Over Static Reporting</p>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">📊</div>
+                    <p>Narrative-Driven Flow</p>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">🔧</div>
+                    <p>Scalable Logic Architecture</p>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-value">⚡</div>
+                    <p>10-Second Decision Making</p>
+                </div>
+            </div>
+            
+            <div class="problem-grid">
+                <div class="problem-card" style="background: linear-gradient(135deg, #00b894 0%, #00a085 100%);">
+                    <h3><center>✅ What Worked</center></h3>
+                    <ul class="success-list">
+                       <li style="color: white;"> Drilldowns, filters, and slicers helped users personalize insights</li>
+                        <li style="color: white;"> Each page had clear purpose (Skill Gaps, ROI, Salary Trends)</li>
+                    <li style="color: white;"> Core measures could power future views and real-time dashboards</li>
+                    </ul>
+                </div>
+                <div class="problem-card" style="background: linear-gradient(135deg, #e0bc68 0%, #e17055 100%);">
+                    <h3><center>🔄 Future Improvements</center></h3>
+                    <ul class="problem-list">
+                        <li style="color: white;">      Add user feedback mechanisms for true product loop</li>
+                        <li style="color: white;">      Design role-based access layer for learners vs. administrators</li>
+                        <li style="color: white;">      Scale to multi-year data for cohort trend analysis</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="highlight-box">
+                <strong>Key Takeaway:</strong> A product mindset doesn't wait for perfect data—it builds actionable interfaces that evolve. This strategic analytics product proves that with the right framing, even internal dashboards can become catalysts for better decisions and deeper value.
+                <br>
+                
+            </div>
+        </section>
+    </div>
+    
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Remove active class from all nav items
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => item.classList.remove('active'));
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active class to clicked nav item
+            event.target.closest('.nav-item').classList.add('active');
+        }
+        
+        // Add some interactive animations
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.persona-card, .feature-card, .metric-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeIn 0.6s ease-out forwards';
+                    }
+                });
+            });
+            
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
